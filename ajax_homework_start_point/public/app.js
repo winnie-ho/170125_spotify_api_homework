@@ -1,15 +1,25 @@
 
 
 var app = function(){
-  var searchBox = document.querySelector("#search-query");
-  searchBox.onkeyup = handleSearch;
+  // var searchBox = document.querySelector("#search-query");
+  // searchBox.onkeyup = handleSearch;
 
   var searchButton = document.querySelector("#search-button");
   searchButton.onclick = handleButtonClick;
 
   var url = "https://api.spotify.com/v1/search?q=" + "all" + "&type=album";
   makeRequest(url, requestComplete)
+
+
 }
+  var handleButtonClick = function (){
+    console.log("button clicked");
+    var searchBox = document.querySelector("#search-query");
+    var url = "https://api.spotify.com/v1/search?q=" + searchBox.value + "&type=album";
+
+    makeRequest(url, requestComplete)
+    console.log("finished");
+  } 
 
 window.onload = app;
 
@@ -20,9 +30,7 @@ window.onload = app;
     return url;
   }
 
-  var handleButtonClick = function (url){  
-    makeRequest(url, requestComplete)
-  }
+  
 
 
 var ResultInfo = null;
@@ -48,7 +56,10 @@ var requestComplete = function (){
 
 
 var showAlbums = function(resultArray){
+
   var albumsDiv = document.querySelector("#albums");
+  albumsDiv.innerHTML = "";
+
     resultArray.forEach(function(album){
 
     var albumBox = document.createElement("div")

@@ -1,6 +1,7 @@
 body{
   background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTUfD_CpR_jXRh-A0vjx8F9oW_QBB79pcDwIdyPM2NYBEAtTT_x");
   background-size: cover;
+  height: 2200px;
 }
 main{
   width: 100%;
