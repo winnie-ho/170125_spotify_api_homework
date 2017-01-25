@@ -15,3 +15,29 @@ input{
   padding: 5px;
 }
 
+h1{
+  font-family: courier;
+  text-align: center;
+}
+
+p{
+  font-family: dosis;
+}
+
+a{
+  font-family: dosis;
+  font-size: 12px;
+}
+
+#album_box{
+  border : solid 1px gray;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 20px;
+}
+
+#albums{
+  display: flex;
+  flex-direction: row;
+
+}

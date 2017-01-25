@@ -1,5 +1,5 @@
 var app = function(){
-var url = "https://api.spotify.com/v1/search?q=rnb&type=album";
+var url = "https://api.spotify.com/v1/search?q=disney&type=album";
 makeRequest(url, requestComplete)
 }
 
@@ -25,6 +25,7 @@ var requestComplete = function (){
   var jsonString = this.responseText;
   ResultInfo = JSON.parse(jsonString);
   var resultArray = ResultInfo.albums.items;
+  console.log(ResultInfo);
   console.log(resultArray);
   showAlbums(resultArray);
 }
@@ -34,16 +35,26 @@ var showAlbums = function(resultArray){
   var albumsDiv = document.querySelector("#albums");
     resultArray.forEach(function(album){
 
-    var point = document.createElement("p");
-    point.innerText = album.name + "\n";
-    albumsDiv.appendChild(point);
+    var albumBox = document.createElement("div")
+    albumBox.id = "album_box"
+    albumsDiv.appendChild(albumBox);
+
+
+
+    var title = document.createElement("p");
+    title.innerText = album.name + "\n";
+    albumBox.appendChild(title);
+
+    var image = document.createElement("img");
+    image.src = album.images[0].url
+    image.width = 100;
+    title.appendChild(image);
 
     var link = document.createElement("a");
-    link.innerText = album.href;
+    link.innerText = "Listen";
     link.href = album.external_urls.spotify;
-    point.appendChild(link);
+    title.appendChild(link);
 
-    console.log(album);
   })
 
 }
