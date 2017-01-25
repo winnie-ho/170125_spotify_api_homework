@@ -1,15 +1,31 @@
+
+
 var app = function(){
-var url = "https://api.spotify.com/v1/search?q=disney&type=album";
-makeRequest(url, requestComplete)
+  var searchBox = document.querySelector("#search-query");
+  searchBox.onkeyup = handleSearch;
+
+  var searchButton = document.querySelector("#search-button");
+  searchButton.onclick = handleButtonClick;
+
+  var url = "https://api.spotify.com/v1/search?q=" + "all" + "&type=album";
+  makeRequest(url, requestComplete)
 }
-
-
-
 
 window.onload = app;
 
-var ResultInfo = null;
+  var handleSearch = function(){
+    var searchString = this.value
+    console.log (searchString);
+    var url = "https://api.spotify.com/v1/search?q=" + searchString + "&type=album";
+    return url;
+  }
 
+  var handleButtonClick = function (url){  
+    makeRequest(url, requestComplete)
+  }
+
+
+var ResultInfo = null;
 
 
 
@@ -41,20 +57,27 @@ var showAlbums = function(resultArray){
 
 
 
-    var title = document.createElement("p");
+    var title = document.createElement("h3");
     title.innerText = album.name + "\n";
     albumBox.appendChild(title);
+
+    var artist = document.createElement("p");
+    artist.innerText = album.artists[0].name + "\n";
+    title.appendChild(artist);
+
+    var link = document.createElement("a");
+    link.innerText = "Listen\n";
+    link.href = album.external_urls.spotify;
+    artist.appendChild(link);
 
     var image = document.createElement("img");
     image.src = album.images[0].url
     image.width = 100;
-    title.appendChild(image);
+    link.appendChild(image);
 
-    var link = document.createElement("a");
-    link.innerText = "Listen";
-    link.href = album.external_urls.spotify;
-    title.appendChild(link);
+    // var hr = document.createElement("hr");
+    // image.appendChild(hr);
 
   })
-
 }
+
