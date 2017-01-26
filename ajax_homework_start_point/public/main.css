@@ -1,7 +1,7 @@
 body{
   background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTUfD_CpR_jXRh-A0vjx8F9oW_QBB79pcDwIdyPM2NYBEAtTT_x");
   background-size: cover;
-  height: 2200px;
+  height: 1300px;
 }
 main{
   width: 100%;
@@ -58,20 +58,21 @@ button{
 }
 
 #album_box{
-  width: 220px;
+  width: 200px;
   display: inline-flex;
   flex-direction: row;
   border : solid 1px white;
   border-radius: 5px;
   margin: 10px;
-  padding: 10px;
   align-content: center;
   justify-content: center;
+  text-align: center;
 }
 
 #albums{
   margin: auto;
   display: inline-flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
