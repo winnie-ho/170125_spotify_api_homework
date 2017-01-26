@@ -1,33 +1,23 @@
-
-
 var app = function(){
-  var searchButton = document.querySelector("#search-button");
-  searchButton.onclick = handleButtonClick;
-
-
+  handleSearch();
   var saved = localStorage.getItem("urlSearch");
   var lastSearch = setSearchText(saved);
   var url = "https://api.spotify.com/v1/search?q=" + saved + "&type=album";
   makeRequest(url, requestComplete)
 }
-var handleButtonClick = function (){
-  var searchBox = document.querySelector("#search-query");
-  var url = "https://api.spotify.com/v1/search?q=" + searchBox.value + "&type=album";
-
-  makeRequest(url, requestComplete)
-  localStorage.setItem("urlSearch", searchBox.value);
-} 
 
 window.onload = app;
 
 
-
 var handleSearch = function(){
-  var searchString = this.value
-  console.log (searchString);
-  var url = "https://api.spotify.com/v1/search?q=" + searchString + "&type=album";
+  var searchQuery = document.getElementById("search-query");
+  var albumsDiv = document.getElementById("albums");
 
-  return url;
+  searchQuery.onkeyup = function (){
+    var url = "https://api.spotify.com/v1/search?q=" + this.value + "&type=album";
+    localStorage.setItem("urlSearch", this.value);
+    makeRequest(url, requestComplete);
+  } 
 }
 
 var setSearchText = function(text){
@@ -83,10 +73,6 @@ var showAlbums = function(resultArray){
     image.src = album.images[0].url
     image.width = 100;
     link.appendChild(image);
-
-    // var hr = document.createElement("hr");
-    // image.appendChild(hr);
-
   })
 }
 
