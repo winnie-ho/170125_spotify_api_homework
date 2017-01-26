@@ -1,41 +1,41 @@
 
 
 var app = function(){
-  // var searchBox = document.querySelector("#search-query");
-  // searchBox.onkeyup = handleSearch;
-
   var searchButton = document.querySelector("#search-button");
   searchButton.onclick = handleButtonClick;
 
-  var url = "https://api.spotify.com/v1/search?q=" + "all" + "&type=album";
+
+  var saved = localStorage.getItem("urlSearch");
+  var lastSearch = setSearchText(saved);
+  var url = "https://api.spotify.com/v1/search?q=" + saved + "&type=album";
   makeRequest(url, requestComplete)
-
-
 }
-  var handleButtonClick = function (){
-    console.log("button clicked");
-    var searchBox = document.querySelector("#search-query");
-    var url = "https://api.spotify.com/v1/search?q=" + searchBox.value + "&type=album";
+var handleButtonClick = function (){
+  var searchBox = document.querySelector("#search-query");
+  var url = "https://api.spotify.com/v1/search?q=" + searchBox.value + "&type=album";
 
-    makeRequest(url, requestComplete)
-    console.log("finished");
-  } 
+  makeRequest(url, requestComplete)
+  localStorage.setItem("urlSearch", searchBox.value);
+} 
 
 window.onload = app;
 
-  var handleSearch = function(){
-    var searchString = this.value
-    console.log (searchString);
-    var url = "https://api.spotify.com/v1/search?q=" + searchString + "&type=album";
-    return url;
-  }
 
-  
 
+var handleSearch = function(){
+  var searchString = this.value
+  console.log (searchString);
+  var url = "https://api.spotify.com/v1/search?q=" + searchString + "&type=album";
+
+  return url;
+}
+
+var setSearchText = function(text){
+  var searchBox = document.querySelector("#search-query");
+  searchBox.value = text;
+}
 
 var ResultInfo = null;
-
-
 
 var makeRequest = function (url, callback) {
   var request = new XMLHttpRequest();
@@ -65,8 +65,6 @@ var showAlbums = function(resultArray){
     var albumBox = document.createElement("div")
     albumBox.id = "album_box"
     albumsDiv.appendChild(albumBox);
-
-
 
     var title = document.createElement("h3");
     title.innerText = album.name + "\n";
